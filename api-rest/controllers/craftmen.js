@@ -27,10 +27,10 @@ function saveCraftmen (req, res) {
   console.log(req.body)
 
   let craftmen = new Craftmen()
-  craftmen.title = req.body.title
-  craftmen.image = req.body.image
+  craftmen.name = req.body.name
   craftmen.description = req.body.description
-  craftmen.confirmation = req.body.confirmation
+  craftmen.phone = req.body.phone
+  craftmen.level = req.body.level
 
   craftmen.save((err, craftmenStored) => {
     if(err) res.status(500).send({message: `Error al salvar en la base de datos: ${err}`})
@@ -54,11 +54,11 @@ function deleteCraftmen (req, res) {
   let craftmenId = req.params.craftmenId
 
   Craftmen.findById(craftmenId, (err, craftmen) => {
-    if(err) res.status(500).send({message: `Error al borrar el usuario ${err}`})
+    if(err) res.status(500).send({message: `Error al borrar el artesano ${err}`})
 
     craftmen.remove(err => {
-      if(err) res.status(500).send({message: `Error al borrar el usuario ${err}`})
-      res.status(200).send({message: `El usuario ha sido eliminado`})
+      if(err) res.status(500).send({message: `Error al borrar el artesano ${err}`})
+      res.status(200).send({message: `El artesano ha sido eliminado`})
     })
   })
 }

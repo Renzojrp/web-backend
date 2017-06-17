@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 const bcrypt = require('bcrypt-nodejs')
 
 const ContractSchema = Schema({
-  title: String,
+  tittle: String,
   image: String,
   description: String,
   confirmation: String,

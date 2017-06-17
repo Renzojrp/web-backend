@@ -27,7 +27,7 @@ function saveContract (req, res) {
   console.log(req.body)
 
   let contract = new Contract()
-  contract.title = req.body.title
+  contract.tittle = req.body.tittle
   contract.image = req.body.image
   contract.description = req.body.description
   contract.confirmation = req.body.confirmation
