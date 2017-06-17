@@ -5,7 +5,7 @@ const User = require('../models/user')
 function getUser (req, res){
   let userId = req.params.userId
 
-  User.findById(userId, (err, product) => {
+  User.findById(userId, (err, user) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!user) return res.status(484).send({message: `El usuario no existe`})
 
