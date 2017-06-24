@@ -1,12 +1,12 @@
 'use strict'
 
 const express = require('express')
-const boyParser = require('body-parser')
+const bodyParser = require('body-parser')
 const app = express()
 const api = require('./routes')
 
-app.use(boyParser.urlencoded({extended: false}))
-app.use(boyParser.json())
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json())
 
 app.use('/api', api)
 

@@ -13,7 +13,7 @@ function getCraftmen (req, res){
   })
 }
 
-function getCraftmens (req, res) {
+function getCraftman (req, res) {
   Craftmen.find({}, (err, craftmens) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!craftmens) return res.status(404).send({message: `No existen artesanos`})
@@ -65,7 +65,7 @@ function deleteCraftmen (req, res) {
 
 module.exports = {
   getCraftmen,
-  getCraftmens,
+  getCraftman,
   saveCraftmen,
   updateCraftmen,
   deleteCraftmen
