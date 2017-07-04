@@ -7,7 +7,8 @@ function signUp (req, res) {
   const user = new User({
     email: req.body.email,
     displayName: req.body.displayName,
-    password: req.body.password
+    password: req.body.password,
+    userType: req.body.userType
   })
 
   user.save((err) => {
@@ -30,7 +31,17 @@ function signIn (req, res) {
   })
 }
 
+function getUsers (req, res) {
+  User.find({}, (err, users) => {
+    if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
+    if(!users) return res.status(404).send({message: `No existen usuarios`})
+
+    res.send(200, { users })
+  })
+}
+
 module.exports = {
   signUp,
-  signIn
+  signIn,
+  getUsers
 }

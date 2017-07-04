@@ -5,7 +5,7 @@ const Musician = require('../models/musician')
 function getMusician (req, res){
   let musicianId = req.params.musicianId
 
-  Musician.findById(musicianId, (err, product) => {
+  Musician.findById(musicianId, (err, musician) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!musician) return res.status(484).send({message: `El músico no existe`})
 
@@ -14,7 +14,7 @@ function getMusician (req, res){
 }
 
 function getMusicians (req, res) {
-  Musician.find({}, (err, users) => {
+  Musician.find({}, (err, musicians) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!users) return res.status(404).send({message: `No existen musicos`})
 
@@ -23,7 +23,7 @@ function getMusicians (req, res) {
 }
 
 function saveMusician (req, res) {
-  console.log('POST /api/user')
+  console.log('POST /api/musician')
   console.log(req.body)
 
   let musician = new Musician()
