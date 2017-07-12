@@ -22,6 +22,7 @@ api.delete('/craftmen/:craftmenId', craftmenControllers.deleteCraftmen)
 api.post('/signup', userControllers.signUp)
 api.post('/signin', userControllers.signIn)
 api.get('/user', userControllers.getUsers)
+api.get('/user/:userId', userControllers.getUser)
 api.get('/publication', auth, publicationControllers.getPublications)
 api.post('/publication', auth, publicationControllers.savePublication)
 api.get('/private', auth, (req, res) => {

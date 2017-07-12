@@ -32,6 +32,8 @@ function savePublication (req, res) {
   let publication = new Publication()
   publication.instrument = req.body.instrument
   publication.description = req.body.description
+  publication.date = req.body.date
+  publication.locationAt = req.body.locationAt
   publication.craftmen = req.body.craftmen
 
   publication.save((err, publicationStored) => {

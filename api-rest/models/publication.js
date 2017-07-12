@@ -8,6 +8,8 @@ const User = mongoose.model('User')
 const PublicationSchema = Schema({
   instrument: String,
   description: String,
+  date: Date,
+  locationAt: String,
   craftmen: {type: Schema.ObjectId, ref: "User"}
 })
 
