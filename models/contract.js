@@ -8,7 +8,7 @@ const ContractSchema = Schema({
   tittle: String,
   image: String,
   description: String,
-  confirmation: String,
+  confirmation: Boolean,
 })
 
 module.exports = mongoose.model('Contract', ContractSchema)

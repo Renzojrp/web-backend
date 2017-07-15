@@ -25,6 +25,7 @@ api.get('/user', userControllers.getUsers)
 api.get('/user/:userId', userControllers.getUser)
 api.get('/publication', publicationControllers.getPublications)
 api.post('/publication', publicationControllers.savePublication)
+api.delete('/publication/:publicationId', publicationControllers.deletePublication)
 api.get('/private', auth, (req, res) => {
   res.status(200).send({ message: 'Tienes acceso' })
 })

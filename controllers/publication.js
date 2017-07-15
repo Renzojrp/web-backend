@@ -32,7 +32,6 @@ function savePublication (req, res) {
   let publication = new Publication()
   publication.instrument = req.body.instrument
   publication.description = req.body.description
-  publication.date = req.body.date
   publication.locationAt = req.body.locationAt
   publication.craftmen = req.body.craftmen
 
@@ -43,8 +42,34 @@ function savePublication (req, res) {
   })
 }
 
+function updatePublication (req, res) {
+  let publicationId = req.params.publicationId
+  let update = req.body
+
+  Publication.findByIdAndUpdate(publicationId, update, (err, publicationUpdated) =>{
+    if(err) res.status(500).send({message: `Error al actualizar la publicación ${err}`})
+
+    res.status(200).send({ publication: publicationUpdated})
+  })
+}
+
+function deletePublication (req, res) {
+  let publicationId = req.params.publicationId
+
+  Publication.findById(publicationId, (err, publication) => {
+    if(err) res.status(500).send({message: `Error al borrar la publicación ${err}`})
+
+    publication.remove(err => {
+      if(err) res.status(500).send({message: `Error al borrar la publicación ${err}`})
+      res.status(200).send({message: `La publicación ha sido eliminado`})
+    })
+  })
+}
+
 module.exports = {
   getPublication,
   getPublications,
-  savePublication
+  savePublication,
+  updatePublication,
+  deletePublication
 }

@@ -8,7 +8,7 @@ const User = mongoose.model('User')
 const PublicationSchema = Schema({
   instrument: String,
   description: String,
-  date: Date,
+  date: { type: Date, default: Date.now() },
   locationAt: String,
   craftmen: {type: Schema.ObjectId, ref: "User"}
 })
