@@ -3,11 +3,11 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const CraftmenSchema = Schema({
+const RewardSchema = Schema({
   name: String,
+  image: String,
   description: String,
-  phone: String,
-  level: String,
+  value: Number,
 })
 
-module.exports = mongoose.model('Craftmen', CraftmenSchema)
+module.exports = mongoose.model('Reward', RewardSchema)

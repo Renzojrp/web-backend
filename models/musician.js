@@ -2,7 +2,6 @@
 
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const bcrypt = require('bcrypt-nodejs')
 
 const MusicianSchema = Schema({
   firstName: String,
@@ -13,5 +12,4 @@ const MusicianSchema = Schema({
   photo: String
 })
 
-module.exports = mongoose.model('Musician', UserSchema)
-
+module.exports = mongoose.model('Musician', MusicianSchema)
