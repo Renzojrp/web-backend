@@ -25,6 +25,28 @@ function getPublications (req, res) {
   });
 }
 
+function getPublicationbyInstrument (req, res){
+  let publicationInstrument = req.params.publicationInstrument
+
+  Publication.find({"instrument":publicationInstrument}, (err, publication) => {
+    if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
+    if(!publication) return res.status(484).send({message: `No existen publicaciones con el instrument: ${publicationInstrument}`})
+
+    res.status(200).send({ publication })
+  })
+}
+
+function getPublicationbyCraftmen (req, res){
+  let publicationCraftmen = req.params.publicationCraftmen
+
+  Publication.find({"craftmen":publicationCraftmen}, (err, publication) => {
+    if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
+    if(!publication) return res.status(484).send({message: `No existen publicaciones del artesano: ${publicationInstrument}`})
+
+    res.status(200).send({ publication })
+  })
+}
+
 function savePublication (req, res) {
   console.log('POST /api/publication')
   console.log(req.body)
@@ -69,6 +91,8 @@ function deletePublication (req, res) {
 module.exports = {
   getPublication,
   getPublications,
+  getPublicationbyInstrument,
+  getPublicationbyCraftmen,
   savePublication,
   updatePublication,
   deletePublication
