@@ -9,7 +9,7 @@ const PublicationSchema = Schema({
   description: String,
   date: { type: Date, default: Date.now() },
   locationAt: String,
-  craftmen: {type: Schema.ObjectId, ref: "User"}
+  user: {type: Schema.ObjectId, ref: "User"}
 })
 
 module.exports = mongoose.model('Publication', PublicationSchema)
