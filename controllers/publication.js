@@ -19,7 +19,7 @@ function getPublications (req, res) {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!publications) return res.status(404).send({message: `No existen publicaciones`})
 
-    User.populate(publications, {path: "craftmen"}, function(err, publications){
+    User.populate(publications, {path: "user"}, function(err, publications){
       res.send(200, { publications })
     });
   });
@@ -28,22 +28,26 @@ function getPublications (req, res) {
 function getPublicationbyInstrument (req, res){
   let publicationInstrument = req.params.publicationInstrument
 
-  Publication.find({"instrument":publicationInstrument}, (err, publication) => {
+  Publication.find({"instrument":publicationInstrument}, (err, publications) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
-    if(!publication) return res.status(484).send({message: `No existen publicaciones con el instrument: ${publicationInstrument}`})
+    if(!publications) return res.status(484).send({message: `No existen publicaciones con el instrument: ${publicationInstrument}`})
 
-    res.status(200).send({ publication })
+    User.populate(publications, {path: "user"}, function(err, publications){
+      res.send(200, { publications })
+    });
   })
 }
 
-function getPublicationbyCraftmen (req, res){
-  let publicationCraftmen = req.params.publicationCraftmen
+function getPublicationbyUser (req, res){
+  let publicationUser = req.params.publicationUser
 
-  Publication.find({"craftmen":publicationCraftmen}, (err, publication) => {
+  Publication.find({"user":publicationUser}, (err, publications) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
-    if(!publication) return res.status(484).send({message: `No existen publicaciones del artesano: ${publicationInstrument}`})
+    if(!publications) return res.status(484).send({message: `No existen publicaciones del artesano: ${publicationInstrument}`})
 
-    res.status(200).send({ publication })
+    User.populate(publications, {path: "user"}, function(err, publications){
+      res.send(200, { publications })
+    });
   })
 }
 
@@ -92,7 +96,7 @@ module.exports = {
   getPublication,
   getPublications,
   getPublicationbyInstrument,
-  getPublicationbyCraftmen,
+  getPublicationbyUser,
   savePublication,
   updatePublication,
   deletePublication
