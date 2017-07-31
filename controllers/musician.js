@@ -28,9 +28,9 @@ function getMusicians (req, res) {
 }
 
 function getMusicianbyUser (req, res){
-  let musicianUser = req.params.musicianUser
+  let userId = req.params.userId
 
-  Musician.find({"user":musicianUser}, (err, musician) => {
+  Musician.find({"user":userId}, (err, musician) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!musician) return res.status(484).send({message: `No existen publicaciones del artesano: ${publicationInstrument}`})
 
