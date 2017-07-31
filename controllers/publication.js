@@ -10,7 +10,9 @@ function getPublication (req, res){
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!publication) return res.status(484).send({message: `La publicación no existe`})
 
-    res.status(200).send({ publication })
+    User.populate(publication, {path: "user"}, function(err, publication){
+      res.status(200).send({ publication })
+    });
   })
 }
 

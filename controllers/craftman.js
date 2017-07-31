@@ -1,6 +1,7 @@
 'use strict'
 
 const Craftman = require('../models/craftman')
+const User = require('../models/user')
 
 function getCraftman (req, res){
   let craftmanId = req.params.craftmanId
@@ -9,7 +10,9 @@ function getCraftman (req, res){
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!craftman) return res.status(484).send({message: `El artesano no existe`})
 
-    res.status(200).send({ craftman })
+    User.populate(craftman, {path: "user"}, function(err, craftman){
+      res.status(200).send({ craftman })
+    });
   })
 }
 
@@ -18,7 +21,9 @@ function getCraftmen (req, res) {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!craftmen) return res.status(404).send({message: `No existen artesanos`})
 
-    res.send(200, { craftmen })
+    User.populate(craftmen, {path: "user"}, function(err, craftmen){
+      res.send(200, { craftmen })
+    });
   })
 }
 
@@ -27,7 +32,6 @@ function saveCraftman (req, res) {
   console.log(req.body)
 
   let craftman = new Craftman()
-  craftman.name = req.body.name
   craftman.description = req.body.description
   craftman.phone = req.body.phone
   craftman.level = req.body.level

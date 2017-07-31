@@ -2,14 +2,14 @@
 
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const User = mongoose.model('User')
 
 const MusicianSchema = Schema({
-  firstName: String,
-  lastName: String,
   birthDate: String,
   gender: String,
   phone: String,
-  photo: String
+  photo: String,
+  user: {type: Schema.ObjectId, ref: "User"}
 })
 
 module.exports = mongoose.model('Musician', MusicianSchema)
