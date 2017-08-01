@@ -35,6 +35,7 @@ api.post('/signin', userControllers.signIn)
 api.get('/user', userControllers.getUsers)
 api.get('/user/:userId', userControllers.getUser)
 api.delete('/user/:userId', userControllers.deleteUser)
+api.put('/user/:userId', userControllers.updateUser)
 
 api.get('/publication', publicationControllers.getPublications)
 api.get('/publication/:publicationId', publicationControllers.getPublication)

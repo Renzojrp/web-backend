@@ -67,6 +67,17 @@ function signIn (req, res) {
   })
 }
 
+function updateUser (req, res){
+  let userId = req.params.userId
+  let update = req.body
+
+  User.findByIdAndUpdate(userId, update, (err, userUpdated) => {
+    if(err) res.status(500).send({message: `Error al actualizar usuario: ${err}`})
+
+      res.status(200).send({user: userUpdated})
+  })
+}
+
 function getUsers (req, res) {
   User.find({}, (err, users) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
@@ -105,5 +116,6 @@ module.exports = {
   signIn,
   getUsers,
   getUser,
+  updateUser,
   deleteUser
 }
