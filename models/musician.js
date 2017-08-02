@@ -9,6 +9,7 @@ const MusicianSchema = Schema({
   gender: String,
   phone: String,
   photo: String,
+  points: Number,
   user: {type: Schema.ObjectId, ref: "User"}
 })
 

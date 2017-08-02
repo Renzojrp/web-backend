@@ -35,6 +35,7 @@ function saveCraftman (req, res) {
   craftman.description = req.body.description
   craftman.phone = req.body.phone
   craftman.level = req.body.level
+  craftman.photo = req.body.photo
 
   craftman.save((err, craftmanStored) => {
     if(err) res.status(500).send({message: `Error al salvar en la base de datos: ${err}`})

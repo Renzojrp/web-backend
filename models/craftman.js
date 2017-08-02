@@ -8,6 +8,7 @@ const CraftmanSchema = Schema({
   description: String,
   phone: String,
   level: String,
+  photo: String,
   user: {type: Schema.ObjectId, ref: "User"}
 })
 

@@ -40,6 +40,7 @@ function signUp (req, res) {
       craftman.description = ""
       craftman.phone = ""
       craftman.level = ""
+      craftman.photo = ""
 
       craftman.save((err, craftmanStored) => {
         if(err) res.status(500).send({message: `Error al salvar en la base de datos: ${err}`})
