@@ -71,6 +71,8 @@ function savePublication (req, res) {
   console.log(req.body)
 
   let publication = new Publication()
+  publication.publicationPhoto = req.body.publicationPhoto
+  publication.title = req.body.title
   publication.instrument = req.body.instrument
   publication.description = req.body.description
   publication.locationAt = req.body.locationAt

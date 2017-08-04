@@ -5,6 +5,8 @@ const Schema = mongoose.Schema
 const User = mongoose.model('User')
 
 const PublicationSchema = Schema({
+  publicationPhoto: String,
+  title: String,
   instrument: String,
   description: String,
   date: { type: Date, default: Date.now() },
