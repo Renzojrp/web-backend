@@ -45,7 +45,20 @@ function getPublicationbyUser (req, res){
 
   Publication.find({"user":publicationUser}, (err, publications) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
-    if(!publications) return res.status(484).send({message: `No existen publicaciones del artesano: ${publicationInstrument}`})
+    if(!publications) return res.status(484).send({message: `No existen publicaciones del artesano: ${publicationUser}`})
+
+    User.populate(publications, {path: "user"}, function(err, publications){
+      res.send(200, { publications })
+    });
+  })
+}
+
+function getPublicationbyState (req, res){
+  let publicationState = req.params.publicationState
+
+  Publication.find({"state":publicationState}, (err, publications) => {
+    if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
+    if(!publications) return res.status(484).send({message: `No existen publicaciones en estado: ${publicationState}`})
 
     User.populate(publications, {path: "user"}, function(err, publications){
       res.send(200, { publications })
@@ -62,6 +75,7 @@ function savePublication (req, res) {
   publication.description = req.body.description
   publication.locationAt = req.body.locationAt
   publication.user = req.body.user
+  publication.state = "A"
 
   publication.save((err, publicationStored) => {
     if(err) res.status(500).send({message: `Error al salvar en la base de datos: ${err}`})
@@ -99,6 +113,7 @@ module.exports = {
   getPublications,
   getPublicationbyInstrument,
   getPublicationbyUser,
+  getPublicationbyState,
   savePublication,
   updatePublication,
   deletePublication

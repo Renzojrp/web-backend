@@ -1,6 +1,10 @@
 'use strict'
 
 const Contract = require('../models/contract')
+const Musician = require('../models/musician')
+const Craftman = require('../models/craftman')
+const Publication = require('../models/publication')
+const User = require('../models/user')
 
 function getContract (req, res){
   let contractId = req.params.contractId
@@ -9,7 +13,9 @@ function getContract (req, res){
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!contract) return res.status(484).send({message: `El contrato no existe`})
 
-    res.status(200).send({ contract })
+    Musician.populate(contract, {path: "musician"}, function(err, contract){
+      res.status(200).send({ contract })
+    });
   })
 }
 
@@ -18,7 +24,13 @@ function getContracts (req, res) {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!contracts) return res.status(404).send({message: `No existen contratos`})
 
-    res.send(200, { contracts })
+    Musician.populate(contracts, {path: "musician"}, function(err, contracts){
+      Craftman.populate(contracts, {path: "craftman"}, function(err, contracts){
+        Publication.populate(contracts, {path: "publication"}, function(err, contracts){
+          res.status(200).send({ contracts })
+        });
+      });
+    });
   })
 }
 
@@ -27,10 +39,10 @@ function saveContract (req, res) {
   console.log(req.body)
 
   let contract = new Contract()
-  contract.tittle = req.body.tittle
-  contract.image = req.body.image
-  contract.description = req.body.description
-  contract.confirmation = req.body.confirmation
+  contract.musician = req.body.musician
+  contract.craftman = req.body.craftman
+  contract.publication = req.body.publication
+  contract.state = req.body.state
 
   contract.save((err, contractStored) => {
     if(err) res.status(500).send({message: `Error al salvar en la base de datos: ${err}`})

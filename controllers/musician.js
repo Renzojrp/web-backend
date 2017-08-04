@@ -32,7 +32,7 @@ function getMusicianbyUser (req, res){
 
   Musician.find({"user":userId}, (err, musician) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
-    if(!musician) return res.status(484).send({message: `No existen publicaciones del artesano: ${publicationInstrument}`})
+    if(!musician) return res.status(484).send({message: `No existen perfil de músico para el usuario: ${userId}`})
 
     User.populate(musician, {path: "user"}, function(err, musician){
       res.send(200, { musician })

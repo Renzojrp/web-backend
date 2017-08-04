@@ -27,6 +27,19 @@ function getCraftmen (req, res) {
   })
 }
 
+function getCraftmanbyUser (req, res){
+  let userId = req.params.userId
+
+  Craftman.find({"user":userId}, (err, craftman) => {
+    if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
+    if(!craftman) return res.status(484).send({message: `No existen publicaciones del artesano: ${userId}`})
+
+    User.populate(craftman, {path: "user"}, function(err, craftman){
+      res.send(200, { craftman })
+    });
+  })
+}
+
 function saveCraftman (req, res) {
   console.log('POST /api/craftman')
   console.log(req.body)
@@ -72,6 +85,7 @@ module.exports = {
   getCraftman,
   getCraftmen,
   saveCraftman,
+  getCraftmanbyUser,
   updateCraftman,
   deleteCraftman
 }
