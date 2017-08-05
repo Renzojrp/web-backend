@@ -20,7 +20,7 @@ api.delete('/contract/:contractId', contractControllers.deleteContract)
 
 api.get('/craftman', craftmanControllers.getCraftmen)
 api.get('/craftman/:craftmanId', craftmanControllers.getCraftman)
-api.get('/craftman/user/:craftmanId', craftmanControllers.getCraftmanbyUser)
+api.get('/craftman/user/:userId', craftmanControllers.getCraftmanbyUser)
 api.post('/craftman', craftmanControllers.saveCraftman)
 api.put('/craftman/:craftmanId', craftmanControllers.updateCraftman)
 api.delete('/craftman/:craftmanId', craftmanControllers.deleteCraftman)
