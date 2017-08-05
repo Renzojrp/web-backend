@@ -43,7 +43,7 @@ function getPublicationbyInstrument (req, res){
 function getPublicationbyUser (req, res){
   let publicationUser = req.params.publicationUser
 
-  Publication.find({"user":publicationUser}, (err, publications) => {
+  Publication.find({"user":publicationUser, "state": "A"}, (err, publications) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!publications) return res.status(484).send({message: `No existen publicaciones del artesano: ${publicationUser}`})
 
