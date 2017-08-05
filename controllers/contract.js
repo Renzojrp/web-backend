@@ -13,8 +13,12 @@ function getContract (req, res){
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!contract) return res.status(484).send({message: `El contrato no existe`})
 
-    Musician.populate(contract, {path: "musician"}, function(err, contract){
-      res.status(200).send({ contract })
+    User.populate(contract, {path: "user"}, function(err, contract){
+      Craftman.populate(contract, {path: "craftman"}, function(err, contract){
+        Publication.populate(contract, {path: "publication"}, function(err, contract){
+          res.status(200).send({ contract })
+        });
+      });
     });
   })
 }
@@ -24,7 +28,24 @@ function getContracts (req, res) {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!contracts) return res.status(404).send({message: `No existen contratos`})
 
-    Musician.populate(contracts, {path: "musician"}, function(err, contracts){
+    User.populate(contracts, {path: "user"}, function(err, contracts){
+      Craftman.populate(contracts, {path: "craftman"}, function(err, contracts){
+        Publication.populate(contracts, {path: "publication"}, function(err, contracts){
+          res.status(200).send({ contracts })
+        });
+      });
+    });
+  })
+}
+
+function getContractbyUser (req, res){
+  let userId = req.params.userId
+
+  Contract.find({"user":userId}, (err, contracts) => {
+    if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
+    if(!contracts) return res.status(484).send({message: `No existen contratos del músico: ${publicationUser}`})
+
+    User.populate(contracts, {path: "user"}, function(err, contracts){
       Craftman.populate(contracts, {path: "craftman"}, function(err, contracts){
         Publication.populate(contracts, {path: "publication"}, function(err, contracts){
           res.status(200).send({ contracts })
@@ -39,7 +60,7 @@ function saveContract (req, res) {
   console.log(req.body)
 
   let contract = new Contract()
-  contract.musician = req.body.musician
+  contract.user = req.body.user
   contract.craftman = req.body.craftman
   contract.publication = req.body.publication
   contract.state = req.body.state
@@ -77,6 +98,7 @@ function deleteContract (req, res) {
 module.exports = {
   getContract,
   getContracts,
+  getContractbyUser,
   saveContract,
   updateContract,
   deleteContract

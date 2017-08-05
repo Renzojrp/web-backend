@@ -13,6 +13,7 @@ const api = express.Router()
 
 api.get('/contract', contractControllers.getContracts)
 api.get('/contract/:contractId', contractControllers.getContract)
+api.get('/contract/user/:userId', contractControllers.getContractbyUser)
 api.post('/contract', contractControllers.saveContract)
 api.put('/contract/:contractId', contractControllers.updateContract)
 api.delete('/contract/:contractId', contractControllers.deleteContract)
