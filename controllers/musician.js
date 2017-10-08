@@ -30,7 +30,7 @@ function getMusicians (req, res) {
 function getMusicianbyUser (req, res){
   let userId = req.params.userId
 
-  Musician.find({"user":userId}, (err, musician) => {
+  Musician.findOne({"user":userId}, (err, musician) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!musician) return res.status(484).send({message: `No existen perfil de músico para el usuario: ${userId}`})
 
