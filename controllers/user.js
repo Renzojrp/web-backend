@@ -20,10 +20,6 @@ function signUp (req, res) {
     if (user.userType == "Musician") {
       let musician = new Musician()
       musician.user = user._id
-      musician.birthDate = ""
-      musician.gender = ""
-      musician.phone = ""
-      musician.photo = ""
 
       musician.save((err, musicianStored) => {
         if(err) res.status(500).send({message: `Error al salvar en la base de datos: ${err}`})
@@ -37,10 +33,6 @@ function signUp (req, res) {
     } else {
       let craftman = new Craftman()
       craftman.user = user._id
-      craftman.description = ""
-      craftman.phone = ""
-      craftman.level = ""
-      craftman.photo = ""
 
       craftman.save((err, craftmanStored) => {
         if(err) res.status(500).send({message: `Error al salvar en la base de datos: ${err}`})

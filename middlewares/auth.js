@@ -11,7 +11,7 @@ function isAuth (req, res, next) {
 
   services.decodeToken(token)
     .then(response => {
-      req.user = response
+      req.musician = response
       next()
     })
     .catch(response => {

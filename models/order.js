@@ -2,15 +2,16 @@
 
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const Musician = mongoose.model('Musician')
 const Craftman = mongoose.model('Craftman')
-const User = mongoose.model('User')
+const Instrument = mongoose.model('Instrument')
 
-const OrderSchema = Schema({
-  user: {type: Schema.ObjectId, ref: "User"},
+const OrderSchema = new Schema({
   craftman: {type: Schema.ObjectId, ref: "Craftman"},
-  publication: {type: Schema.ObjectId, ref: "Publication"},
-  state: String
+  instrument: {type: Schema.ObjectId, ref: "Instrument"},
+  description: String,
+  date: { type: Date, default: Date.now() },
+  locationAt: String,
+  status: { type: String, default: "A" }
 })
 
 module.exports = mongoose.model('Order', OrderSchema)

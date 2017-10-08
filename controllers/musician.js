@@ -1,7 +1,7 @@
 'use strict'
 
-const Musician = require('../models/musician')
 const User = require('../models/user')
+const Musician = require('../models/musician')
 
 function getMusician (req, res){
   let musicianId = req.params.musicianId
@@ -45,10 +45,8 @@ function saveMusician (req, res) {
   console.log(req.body)
 
   let musician = new Musician()
-  musician.birthDate = req.body.birthDate
-  musician.gender=req.body.gender
-  musician.phone=req.body.phone
-  musician.photo=req.body.photo
+  musician.user = req.body.user
+  musician.points = req.body.points
 
   musician.save((err, userStored) => {
     if(err) res.status(500).send({message: `Error al salvar en la base de datos: ${err}`})

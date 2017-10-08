@@ -1,7 +1,9 @@
 'use strict'
 
-const Publication = require('../models/publication')
+const Musician = require('../models/musician')
 const User = require('../models/user')
+const Instrument = require('../models/instrument')
+const Publication = require('../models/publication')
 
 function getPublication (req, res){
   let publicationId = req.params.publicationId
@@ -10,9 +12,14 @@ function getPublication (req, res){
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!publication) return res.status(484).send({message: `La publicación no existe`})
 
-    User.populate(publication, {path: "user"}, function(err, publication){
-      res.status(200).send({ publication })
+    Instrument.populate(publication, {path: "instrument"}, function(err, publication){
+      Musician.populate(publication, {path: "instrument.musician"}, function(err, publication){
+        User.populate(publication, {path: "instrument.musician.user"}, function(err, publication){
+          res.send(200, { publication })
+        });
+      });
     });
+
   })
 }
 
@@ -21,47 +28,63 @@ function getPublications (req, res) {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!publications) return res.status(404).send({message: `No existen publicaciones`})
 
-    User.populate(publications, {path: "user"}, function(err, publications){
-      res.send(200, { publications })
+    Instrument.populate(publications, {path: "instrument"}, function(err, publications){
+      Musician.populate(publications, {path: "instrument.musician"}, function(err, publications){
+        User.populate(publications, {path: "instrument.musician.user"}, function(err, publications){
+          res.send(200, { publications })
+        });
+      });
     });
   });
 }
 
 function getPublicationbyInstrument (req, res){
-  let publicationInstrument = req.params.publicationInstrument
+  let instrument = req.params.instrument
 
-  Publication.find({"instrument":publicationInstrument}, (err, publications) => {
+  Publication.find({"instrument":instrument}, (err, publications) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
-    if(!publications) return res.status(484).send({message: `No existen publicaciones con el instrument: ${publicationInstrument}`})
+    if(!publications) return res.status(484).send({message: `No existen publicaciones con el instrument: ${instrument}`})
 
-    User.populate(publications, {path: "user"}, function(err, publications){
-      res.send(200, { publications })
+    Instrument.populate(publications, {path: "instrument"}, function(err, publications){
+      Musician.populate(publications, {path: "instrument.musician"}, function(err, publications){
+        User.populate(publications, {path: "instrument.musician.user"}, function(err, publications){
+          res.send(200, { publications })
+        });
+      });
     });
   })
 }
 
-function getPublicationbyUser (req, res){
-  let publicationUser = req.params.publicationUser
+function getPublicationbyMusician (req, res){
+  let musicianId = req.params.musicianId
 
-  Publication.find({"user":publicationUser, "state": "A"}, (err, publications) => {
+  Publication.find({"musician":publicationMusician, "state": "A"}, (err, publications) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!publications) return res.status(484).send({message: `No existen publicaciones del artesano: ${publicationUser}`})
 
-    User.populate(publications, {path: "user"}, function(err, publications){
-      res.send(200, { publications })
+    Instrument.populate(publications, {path: "instrument"}, function(err, publications){
+      Musician.populate(publications, {path: "instrument.musician"}, function(err, publications){
+        User.populate(publications, {path: "instrument.musician.user"}, function(err, publications){
+          res.send(200, { publications })
+        });
+      });
     });
   })
 }
 
-function getPublicationbyState (req, res){
-  let publicationState = req.params.publicationState
+function getPublicationbyStatus (req, res){
+  let status = req.params.status
 
-  Publication.find({"state":publicationState}, (err, publications) => {
+  Publication.find({"state":status}, (err, publications) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
-    if(!publications) return res.status(484).send({message: `No existen publicaciones en estado: ${publicationState}`})
+    if(!publications) return res.status(484).send({message: `No existen publicaciones en estado: ${status}`})
 
-    User.populate(publications, {path: "user"}, function(err, publications){
-      res.send(200, { publications })
+    Instrument.populate(publications, {path: "instrument"}, function(err, publications){
+      Musician.populate(publications, {path: "instrument.musician"}, function(err, publications){
+        User.populate(publications, {path: "instrument.musician.user"}, function(err, publications){
+          res.send(200, { publications })
+        });
+      });
     });
   })
 }
@@ -71,13 +94,9 @@ function savePublication (req, res) {
   console.log(req.body)
 
   let publication = new Publication()
-  publication.publicationPhoto = req.body.publicationPhoto
-  publication.title = req.body.title
   publication.instrument = req.body.instrument
   publication.description = req.body.description
   publication.locationAt = req.body.locationAt
-  publication.user = req.body.user
-  publication.state = "A"
 
   publication.save((err, publicationStored) => {
     if(err) res.status(500).send({message: `Error al salvar en la base de datos: ${err}`})
@@ -114,8 +133,8 @@ module.exports = {
   getPublication,
   getPublications,
   getPublicationbyInstrument,
-  getPublicationbyUser,
-  getPublicationbyState,
+  getPublicationbyMusician,
+  getPublicationbyStatus,
   savePublication,
   updatePublication,
   deletePublication

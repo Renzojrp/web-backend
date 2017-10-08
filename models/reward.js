@@ -3,11 +3,11 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const RewardSchema = Schema({
+const RewardSchema = new Schema({
   name: String,
-  image: String,
+  picture: String,
   description: String,
-  value: Number,
+  value: Number
 })
 
 module.exports = mongoose.model('Reward', RewardSchema)

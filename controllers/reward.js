@@ -2,14 +2,14 @@
 
 const Reward = require('../models/reward')
 
-function getReward (req, res){
+function getReward (req, res) {
   let rewardId = req.params.rewardId
 
   Reward.findById(rewardId, (err, reward) => {
-    if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
-    if(!reward) return res.status(484).send({message: `La recompensa no existe`})
+    if(err) return res.status(500).send({message: `Error al realizar la petición: ${err}`})
+    if(!reward) return res.status(404).send({message: `Error el producto no existe`})
 
-    res.status(200).send({ reward })
+    res.send(200, { reward })
   })
 }
 
@@ -28,14 +28,14 @@ function saveReward (req, res) {
 
   let reward = new Reward()
   reward.name = req.body.name
-  reward.image = req.body.image
+  reward.picture = req.body.picture
   reward.description = req.body.description
   reward.value = req.body.value
 
   reward.save((err, rewardStored) => {
     if(err) res.status(500).send({message: `Error al salvar en la base de datos: ${err}`})
 
-    res.status(200).send({contract: rewardStored})
+    res.status(200).send({reward: rewardStored})
   })
 }
 
@@ -58,10 +58,11 @@ function deleteReward (req, res) {
 
     reward.remove(err => {
       if(err) res.status(500).send({message: `Error al borrar la recompensa ${err}`})
-      res.status(200).send({message: `La recompensa se ha sido eliminado`})
+      res.status(200).send({message: `La recompensa se ha sido eliminada`})
     })
   })
 }
+
 module.exports = {
   getReward,
   getRewards,

@@ -4,13 +4,9 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const User = mongoose.model('User')
 
-const MusicianSchema = Schema({
-  birthDate: String,
-  gender: String,
-  phone: String,
-  photo: String,
-  points: Number,
-  user: {type: Schema.ObjectId, ref: "User"}
+const MusicianSchema = new Schema({
+  user: {type: Schema.ObjectId, ref: "User"},
+  points: { type: Number, default: 0 }
 })
 
 module.exports = mongoose.model('Musician', MusicianSchema)

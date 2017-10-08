@@ -4,9 +4,9 @@ const jwt = require('jwt-simple')
 const moment = require('moment')
 const config = require('../config')
 
-function createToken (user) {
+function createToken (musician) {
   const payload = {
-    sub: user._id,
+    sub: musician._id,
     iat: moment().unix(),
     exp: moment().add(14, 'days').unix()
   }
