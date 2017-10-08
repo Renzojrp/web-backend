@@ -35,7 +35,7 @@ function getMusicianbyUser (req, res){
     if(!musician) return res.status(484).send({message: `No existen perfil de músico para el usuario: ${userId}`})
 
     User.populate(musician, {path: "user"}, function(err, musician){
-      res.send(200, { musician })
+      res.status(200).send({ musician })
     });
   })
 }
