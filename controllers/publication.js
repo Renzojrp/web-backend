@@ -58,7 +58,7 @@ function getPublicationbyInstrument (req, res){
 function getPublicationbyMusician (req, res){
   let musicianId = req.params.musicianId
 
-  Publication.find({"instrument.musician":musicianId, "state": "A"}, (err, publications) => {
+  Publication.find({path: "instrument.musician":musicianId, "state": "A"}, (err, publications) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!publications) return res.status(484).send({message: `No existen publicaciones del artesano: ${publicationUser}`})
 
