@@ -12,10 +12,12 @@ function getPublication (req, res){
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!publication) return res.status(484).send({message: `La publicación no existe`})
 
-    Instrument.populate(publication, {path: "instrument"}, function(err, publication){
-      Musician.populate(publication, {path: "instrument.musician"}, function(err, publication){
-        User.populate(publication, {path: "instrument.musician.user"}, function(err, publication){
-          res.send(200, { publication })
+    Instrument.populate(publications, {path: "instrument"}, function(err, publications){
+      Musician.populate(publications, {path: "instrument.musician"}, function(err, publications){
+        Musician.populate(publications, {path: "musician"}, function(err, publications){
+          User.populate(publications, {path: "instrument.musician.user"}, function(err, publications){
+            res.send(200, { publications })
+          });
         });
       });
     });
@@ -30,8 +32,10 @@ function getPublications (req, res) {
 
     Instrument.populate(publications, {path: "instrument"}, function(err, publications){
       Musician.populate(publications, {path: "instrument.musician"}, function(err, publications){
-        User.populate(publications, {path: "instrument.musician.user"}, function(err, publications){
-          res.send(200, { publications })
+        Musician.populate(publications, {path: "musician"}, function(err, publications){
+          User.populate(publications, {path: "instrument.musician.user"}, function(err, publications){
+            res.send(200, { publications })
+          });
         });
       });
     });
@@ -41,14 +45,16 @@ function getPublications (req, res) {
 function getPublicationbyInstrument (req, res){
   let instrument = req.params.instrument
 
-  Publication.find({"instrument":instrument}, (err, publications) => {
+  Publication.find({"instrument.instrument":instrument}, (err, publications) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!publications) return res.status(484).send({message: `No existen publicaciones con el instrument: ${instrument}`})
 
     Instrument.populate(publications, {path: "instrument"}, function(err, publications){
       Musician.populate(publications, {path: "instrument.musician"}, function(err, publications){
-        User.populate(publications, {path: "instrument.musician.user"}, function(err, publications){
-          res.send(200, { publications })
+        Musician.populate(publications, {path: "musician"}, function(err, publications){
+          User.populate(publications, {path: "instrument.musician.user"}, function(err, publications){
+            res.send(200, { publications })
+          });
         });
       });
     });
@@ -58,14 +64,16 @@ function getPublicationbyInstrument (req, res){
 function getPublicationbyMusician (req, res){
   let musicianId = req.params.musicianId
 
-  Publication.find({path: "instrument.musician":musicianId, "state": "A"}, (err, publications) => {
+  Publication.find({"musician": musicianId, "status": "A"}, (err, publications) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
-    if(!publications) return res.status(484).send({message: `No existen publicaciones del artesano: ${publicationUser}`})
+    if(!publications) return res.status(484).send({message: `No existen publicaciones del artesano: ${musicianId}`})
 
     Instrument.populate(publications, {path: "instrument"}, function(err, publications){
       Musician.populate(publications, {path: "instrument.musician"}, function(err, publications){
-        User.populate(publications, {path: "instrument.musician.user"}, function(err, publications){
-          res.send(200, { publications })
+        Musician.populate(publications, {path: "musician"}, function(err, publications){
+          User.populate(publications, {path: "instrument.musician.user"}, function(err, publications){
+            res.send(200, { publications })
+          });
         });
       });
     });
