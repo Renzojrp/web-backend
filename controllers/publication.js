@@ -106,6 +106,7 @@ function savePublication (req, res) {
   publication.description = req.body.description
   publication.locationAt = req.body.locationAt
   publication.deliveryDay = req.body.deliveryDay
+  publication.musician = req.body.musician
 
   publication.save((err, publicationStored) => {
     if(err) res.status(500).send({message: `Error al salvar en la base de datos: ${err}`})
