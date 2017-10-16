@@ -97,6 +97,7 @@ function saveOrder (req, res) {
   order.instrument = req.body.instrument
   order.description = req.body.description
   order.locationAt = req.body.locationAt
+  order.deliveryDay = req.body.deliveryDay
 
   order.save((err, orderStored) => {
     if(err) res.status(500).send({message: `Error al salvar en la base de datos: ${err}`})

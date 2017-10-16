@@ -9,6 +9,7 @@ const OrderSchema = new Schema({
   craftman: {type: Schema.ObjectId, ref: "Craftman"},
   instrument: {type: Schema.ObjectId, ref: "Instrument"},
   description: String,
+  deliveryDay: String,
   date: { type: Date, default: Date.now() },
   locationAt: String,
   status: { type: String, default: "A" }
