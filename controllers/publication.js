@@ -83,7 +83,7 @@ function getPublicationbyMusician (req, res){
 function getPublicationbyStatus (req, res){
   let status = req.params.status
 
-  Publication.find({"state":status}, (err, publications) => {
+  Publication.find({"state":"A"}, (err, publications) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!publications) return res.status(484).send({message: `No existen publicaciones en estado: ${status}`})
 
