@@ -49,7 +49,7 @@ function getOrders (req, res) {
 function getOrdersbyMusician (req, res){
   let musicianId = req.params.musicianId
 
-  Order.find({"musician":musicianId}, (err, orders) => {
+  Order.find({"musician": musicianId, "status": "A"}, (err, orders) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!orders) return res.status(484).send({message: `No existen ordenes del músico: ${musicianId}`})
 
@@ -95,6 +95,7 @@ function saveOrder (req, res) {
   let order = new Order()
   order.craftman = req.body.craftman
   order.instrument = req.body.instrument
+  order.musician = req.body.musician
   order.description = req.body.description
   order.locationAt = req.body.locationAt
   order.deliveryDay = req.body.deliveryDay

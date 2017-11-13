@@ -21,7 +21,7 @@ api.put('/user/:userId', userControllers.updateUser)
 
 api.get('/musician', musicianControllers.getMusicians)
 api.get('/musician/:musicianId', musicianControllers.getMusician)
-api.get('/musician/user/:userId', auth, musicianControllers.getMusicianbyUser)
+api.get('/musician/user/:userId', musicianControllers.getMusicianbyUser)
 api.post('/musician', musicianControllers.saveMusician)
 api.put('/musician/:musicianId', musicianControllers.updateMusician)
 api.delete('/musician/:musicianId', musicianControllers.deleteMusician)
