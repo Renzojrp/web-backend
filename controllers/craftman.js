@@ -30,7 +30,7 @@ function getCraftmen (req, res) {
 function getCraftmanbyUser (req, res){
   let userId = req.params.userId
 
-  Craftman.find({"user":userId}, (err, craftman) => {
+  Craftman.findOne({"user":userId}, (err, craftman) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!craftman) return res.status(484).send({message: `No existen perfil de artesano para el artesano: ${userId}`})
 
