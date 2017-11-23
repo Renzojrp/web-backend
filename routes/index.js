@@ -48,7 +48,7 @@ api.put('/instrument/:instrumentId', auth, instrumentControllers.updateInstrumen
 
 api.get('/publication', auth, publicationControllers.getPublications)
 api.get('/publication/:publicationId', auth, publicationControllers.getPublication)
-api.get('/publication/instrument/:instrument', auth, publicationControllers.getPublicationbyInstrument)
+api.get('/publication/instrument/:instrumentId', auth, publicationControllers.getPublicationbyInstrument)
 api.get('/publication/musician/:musicianId', auth, publicationControllers.getPublicationbyMusician)
 api.get('/publication/status/:status', auth, publicationControllers.getPublicationbyStatus)
 api.post('/publication', auth, publicationControllers.savePublication)
