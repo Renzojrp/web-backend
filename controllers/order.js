@@ -88,6 +88,27 @@ function getOrdersbyCraftman (req, res){
   })
 }
 
+function getOrdersbyInstrument (req, res){
+  let instrumentId = req.params.instrumentId
+
+  Order.find({"instrument":instrumentId}, (err, orders) => {
+    if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
+    if(!orders) return res.status(484).send({message: `No existen ordenes del artesano: ${craftmanId}`})
+
+    Instrument.populate(orders, {path: "instrument"}, function(err, orders){
+      Craftman.populate(orders, {path: "craftman"}, function(err, orders){
+        Musician.populate(orders, {path: "instrument.musician"}, function(err, orders){
+          User.populate(orders, {path: "instrument.musician.user"}, function(err, orders){
+            User.populate(orders, {path: "craftman.user"}, function(err, orders){
+              res.send(200, { orders })
+            });
+          });
+        });
+      });
+    });
+  })
+}
+
 function saveOrder (req, res) {
   console.log('POST /api/order')
   console.log(req.body)
@@ -135,6 +156,7 @@ module.exports = {
   getOrders,
   getOrdersbyMusician,
   getOrdersbyCraftman,
+  getOrdersbyInstrument,
   saveOrder,
   updateOrder,
   deleteOrder
