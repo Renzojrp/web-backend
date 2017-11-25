@@ -91,6 +91,17 @@ function getUser (req, res){
   })
 }
 
+function getUserByEmail (req, res){
+  let email = req.params.email
+
+  User.findOne({"email":email}, (err, user) => {
+    if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
+    if(!user) return res.status(484).send({message: `El correo ya esta registrado`})
+
+    res.status(200).send({ user })
+  })
+}
+
 function deleteUser (req, res) {
   let userId = req.params.userId
 
@@ -109,6 +120,7 @@ module.exports = {
   signIn,
   getUsers,
   getUser,
+  getUserByEmail,
   updateUser,
   deleteUser
 }

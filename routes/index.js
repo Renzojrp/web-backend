@@ -14,8 +14,9 @@ const api = express.Router()
 
 api.post('/signup', userControllers.signUp)
 api.post('/signin', userControllers.signIn)
-api.get('/user', auth, userControllers.getUsers)
-api.get('/user/:userId', auth, userControllers.getUser)
+api.get('/user', userControllers.getUsers)
+api.get('/user/:userId', userControllers.getUser)
+api.get('/user/:email', userControllers.getUserByEmail)
 api.delete('/user/:userId', auth, userControllers.deleteUser)
 api.put('/user/:userId', auth, userControllers.updateUser)
 
