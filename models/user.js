@@ -11,7 +11,7 @@ const UserSchema = new Schema({
   signupDate: { type: Date, default: Date.now() },
   birthDate: { type: String, default: "" },
   gender: { type: String, default: "" },
-  phone: { type: Number, default: 0 },
+  phone: { type: String, default: "" },
   photo: { type: String, default: "" }
 })
 
