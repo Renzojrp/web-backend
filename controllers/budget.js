@@ -110,7 +110,6 @@ function saveBudget (req, res) {
   budget.musician = req.body.musician
   budget.craftman = req.body.craftman
   budget.price = req.body.price
-  budget.deliveryDay = req.body.deliveryDay
 
   budget.save((err, budgetStored) => {
     if(err) res.status(500).send({message: `Error al salvar en la base de datos: ${err}`})

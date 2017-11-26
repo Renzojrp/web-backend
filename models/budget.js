@@ -11,7 +11,6 @@ const BudgetSchema = new Schema({
   musician: {type: Schema.ObjectId, ref: "Musician"},
   craftman: {type: Schema.ObjectId, ref: "Craftman"},
   price: Number,
-  deliveryDay: String,
   date: { type: Date, default: Date.now() },
   status: { type: String, default: "A" }
 })
