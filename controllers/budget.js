@@ -3,6 +3,9 @@
 const Publication = require('../models/publication')
 const Musician = require('../models/musician')
 const Craftman = require('../models/craftman')
+const Budget = require('../models/budget')
+const Instrument = require('../models/instrument')
+const User = require('../models/user')
 
 function getBudget (req, res){
   let budgetId = req.params.budgetId
