@@ -14,15 +14,15 @@ function getBudget (req, res){
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!budget) return res.status(484).send({message: `El presupuesto no existe`})
 
-    Publication.populate(budgets, {path: "publication"}, function(err, budgets){
-      Instrument.populate(budgets, {path: "publicaton.instrument"}, function(err, budgets){
-        Musician.populate(budgets, {path: "publicaton.instrument.musician"}, function(err, budgets){
-          Musician.populate(budgets, {path: "musician"}, function(err, budgets){
-            User.populate(budgets, {path: "publicaton.instrument.musician.user"}, function(err, budgets){
-              Craftman.populate(budgets, {path: "craftman"}, function(err, budgets){
-                User.populate(budgets, {path: "musician.user"}, function(err, budgets){
-                  User.populate(budgets, {path: "craftman.user"}, function(err, budgets){
-                    res.send(200, { budgets })
+    Publication.populate(budget, {path: "publication"}, function(err, budget){
+      Instrument.populate(budget, {path: "publicaton.instrument"}, function(err, budget){
+        Musician.populate(budget, {path: "publicaton.instrument.musician"}, function(err, budget){
+          Musician.populate(budget, {path: "musician"}, function(err, budget){
+            User.populate(budget, {path: "publicaton.instrument.musician.user"}, function(err, budget){
+              Craftman.populate(budget, {path: "craftman"}, function(err, budget){
+                User.populate(budget, {path: "musician.user"}, function(err, budget){
+                  User.populate(budget, {path: "craftman.user"}, function(err, budget){
+                    res.send(200, { budget })
                   });
                 });
               });
@@ -94,10 +94,20 @@ function getBudgetbyStatus (req, res){
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!budgets) return res.status(484).send({message: `No existen presupuestos en estado: ${status}`})
 
-    Instrument.populate(publications, {path: "instrument"}, function(err, publications){
-      Musician.populate(publications, {path: "instrument.musician"}, function(err, publications){
-        User.populate(publications, {path: "instrument.musician.user"}, function(err, publications){
-          res.send(200, { publications })
+    Publication.populate(budgets, {path: "publicaton"}, function(err, budgets){
+      Instrument.populate(budgets, {path: "publicaton.instrument"}, function(err, budgets){
+        Musician.populate(budgets, {path: "publicaton.instrument.musician"}, function(err, budgets){
+          Musician.populate(budgets, {path: "musician"}, function(err, budgets){
+            User.populate(budgets, {path: "publicaton.instrument.musician.user"}, function(err, budgets){
+              Craftman.populate(budgets, {path: "craftman"}, function(err, budgets){
+                User.populate(budgets, {path: "musician.user"}, function(err, budgets){
+                  User.populate(budgets, {path: "craftman.user"}, function(err, budgets){
+                    res.send(200, { budgets })
+                  });
+                });
+              });
+            });
+          });
         });
       });
     });
@@ -128,7 +138,7 @@ function updateBudget (req, res) {
   Budget.findByIdAndUpdate(budgetId, update, (err, budgetUpdated) =>{
     if(err) res.status(500).send({message: `Error al actualizar el presupuesto ${err}`})
 
-    res.status(200).send({ publication: budgetUpdated})
+    res.status(200).send({ budget: budgetUpdated})
   })
 }
 

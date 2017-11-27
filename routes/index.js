@@ -9,6 +9,7 @@ const musicianControllers = require('../controllers/musician')
 const orderControllers = require('../controllers/order')
 const instrumentControllers = require('../controllers/instrument')
 const budgetControllers = require('../controllers/budget')
+const contractControllers = require('../controllers/contract')
 const auth = require('../middlewares/auth')
 
 const api = express.Router()
@@ -73,6 +74,14 @@ api.get('/budget/status/:status', auth, budgetControllers.getBudgetbyStatus)
 api.post('/budget', auth, budgetControllers.saveBudget)
 api.delete('/budget/:budgetId', auth, budgetControllers.deleteBudget)
 api.put('/budget/:budgetId', auth, budgetControllers.updateBudget)
+
+api.get('/contract', auth, contractControllers.getContracts)
+api.get('/contract/:contractId', auth, contractControllers.getContract)
+api.get('/contract/musician/:musicianId', auth, contractControllers.getContractByMusician)
+api.get('/contract/craftman/:craftmanId', auth, contractControllers.getContractByCraftman)
+api.post('/contract', auth, contractControllers.saveContract)
+api.delete('/contract/:contractId', auth, contractControllers.deleteContract)
+api.put('/contract/:contractId', auth, contractControllers.updateContract)
 
 api.get('/private', auth, (req, res) => {
   res.status(200).send({ message: 'Tienes acceso' })

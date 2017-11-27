@@ -70,7 +70,7 @@ function getOrdersbyMusician (req, res){
 function getOrdersbyCraftman (req, res){
   let craftmanId = req.params.craftmanId
 
-  Order.find({"craftman":craftmanId}, (err, orders) => {
+  Order.find({"craftman":craftmanId, "status": "A"}, (err, orders) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!orders) return res.status(484).send({message: `No existen ordenes del artesano: ${craftmanId}`})
 
