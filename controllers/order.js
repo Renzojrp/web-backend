@@ -118,6 +118,7 @@ function saveOrder (req, res) {
   order.instrument = req.body.instrument
   order.musician = req.body.musician
   order.description = req.body.description
+  order.price = req.body.price
   order.locationAt = req.body.locationAt
   order.deliveryDay = req.body.deliveryDay
 

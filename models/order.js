@@ -14,6 +14,7 @@ const OrderSchema = new Schema({
   deliveryDay: String,
   date: { type: Date, default: Date.now() },
   locationAt: String,
+  price: Number,
   status: { type: String, default: "A" }
 })
 
