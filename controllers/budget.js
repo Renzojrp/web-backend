@@ -14,7 +14,7 @@ function getBudget (req, res){
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!budget) return res.status(484).send({message: `El presupuesto no existe`})
 
-    Publication.populate(budgets, {path: "publicaton"}, function(err, budgets){
+    Publication.populate(budgets, {path: "publication"}, function(err, budgets){
       Instrument.populate(budgets, {path: "publicaton.instrument"}, function(err, budgets){
         Musician.populate(budgets, {path: "publicaton.instrument.musician"}, function(err, budgets){
           Musician.populate(budgets, {path: "musician"}, function(err, budgets){
