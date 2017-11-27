@@ -12,11 +12,11 @@ function getPublication (req, res){
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!publication) return res.status(484).send({message: `La publicación no existe`})
 
-    Instrument.populate(publications, {path: "instrument"}, function(err, publications){
-      Musician.populate(publications, {path: "instrument.musician"}, function(err, publications){
-        Musician.populate(publications, {path: "musician"}, function(err, publications){
-          User.populate(publications, {path: "instrument.musician.user"}, function(err, publications){
-            res.send(200, { publications })
+    Instrument.populate(publication, {path: "instrument"}, function(err, publication){
+      Musician.populate(publication, {path: "instrument.musician"}, function(err, publication){
+        Musician.populate(publication, {path: "musician"}, function(err, publication){
+          User.populate(publication, {path: "instrument.musician.user"}, function(err, publication){
+            res.send(200, { publication })
           });
         });
       });
