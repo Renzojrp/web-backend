@@ -65,7 +65,7 @@ function  getBudgetByPublication (req, res){
 
   Budget.find({"publication":publicationId}, (err, budgets) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
-    if(!budgets) return res.status(484).send({message: `No existen prepuestos para esta publicaion: ${instrument}`})
+    if(!budgets) return res.status(484).send({message: `No existen prepuestos para esta publicaion: ${publicationId}`})
 
     Publication.populate(budgets, {path: "publicaton"}, function(err, budgets){
       Instrument.populate(budgets, {path: "publicaton.instrument"}, function(err, budgets){

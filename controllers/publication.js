@@ -47,7 +47,7 @@ function getPublicationbyInstrument (req, res){
 
   Publication.find({"instrument":instrumentId}, (err, publications) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
-    if(!publications) return res.status(484).send({message: `No existen publicaciones con el instrument: ${instrument}`})
+    if(!publications) return res.status(484).send({message: `No existen publicaciones con el instrumento: ${instrumentId}`})
 
     Instrument.populate(publications, {path: "instrument"}, function(err, publications){
       Musician.populate(publications, {path: "instrument.musician"}, function(err, publications){

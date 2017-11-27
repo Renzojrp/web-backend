@@ -93,7 +93,7 @@ function getOrdersbyInstrument (req, res){
 
   Order.find({"instrument":instrumentId}, (err, orders) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
-    if(!orders) return res.status(484).send({message: `No existen ordenes del artesano: ${craftmanId}`})
+    if(!orders) return res.status(484).send({message: `No existen ordenes del artesano: ${instrumentId}`})
 
     Instrument.populate(orders, {path: "instrument"}, function(err, orders){
       Craftman.populate(orders, {path: "craftman"}, function(err, orders){
