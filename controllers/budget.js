@@ -67,11 +67,11 @@ function  getBudgetByPublication (req, res){
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!budgets) return res.status(484).send({message: `No existen prepuestos para esta publicaion: ${publicationId}`})
 
-    Publication.populate(budgets, {path: "publicaton"}, function(err, budgets){
-      Instrument.populate(budgets, {path: "publicaton.instrument"}, function(err, budgets){
-        Musician.populate(budgets, {path: "publicaton.instrument.musician"}, function(err, budgets){
+    Publication.populate(budgets, {path: "publication"}, function(err, budgets){
+      Instrument.populate(budgets, {path: "publication.instrument"}, function(err, budgets){
+        Musician.populate(budgets, {path: "publication.instrument.musician"}, function(err, budgets){
           Musician.populate(budgets, {path: "musician"}, function(err, budgets){
-            User.populate(budgets, {path: "publicaton.instrument.musician.user"}, function(err, budgets){
+            User.populate(budgets, {path: "publication.instrument.musician.user"}, function(err, budgets){
               Craftman.populate(budgets, {path: "craftman"}, function(err, budgets){
                 User.populate(budgets, {path: "musician.user"}, function(err, budgets){
                   User.populate(budgets, {path: "craftman.user"}, function(err, budgets){
