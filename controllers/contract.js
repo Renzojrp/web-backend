@@ -27,7 +27,11 @@ function getContract (req, res){
                       Instrument.populate(contract, {path: "order.instrument"}, function(err, contract){
                         Musician.populate(contract, {path: "order.instrument.musician"}, function(err, contract){
                           User.populate(contract, {path: "order.instrument.musician.user"}, function(err, contract){
-                            res.send(200, { contract })
+                            Craftman.populate(contract, {path: "order.craftman"}, function(err, contract){
+                              User.populate(contract, {path: "order.craftman.user"}, function(err, contract){
+                                res.send(200, { contract })
+                              });
+                            });
                           });
                         });
                       });
@@ -61,7 +65,11 @@ function getContracts (req, res) {
                       Instrument.populate(contracts, {path: "order.instrument"}, function(err, contracts){
                         Musician.populate(contracts, {path: "order.instrument.musician"}, function(err, contracts){
                           User.populate(contracts, {path: "order.instrument.musician.user"}, function(err, contracts){
-                            res.send(200, { contracts })
+                            Craftman.populate(contracts, {path: "order.craftman"}, function(err, contracts){
+                              User.populate(contracts, {path: "order.craftman.user"}, function(err, contracts){
+                                res.send(200, { contracts })
+                              });
+                            });
                           });
                         });
                       });
@@ -97,7 +105,11 @@ function  getContractByMusician (req, res){
                       Instrument.populate(contracts, {path: "order.instrument"}, function(err, contracts){
                         Musician.populate(contracts, {path: "order.instrument.musician"}, function(err, contracts){
                           User.populate(contracts, {path: "order.instrument.musician.user"}, function(err, contracts){
-                            res.send(200, { contracts })
+                            Craftman.populate(contracts, {path: "order.craftman"}, function(err, contracts){
+                              User.populate(contracts, {path: "order.craftman.user"}, function(err, contracts){
+                                res.send(200, { contracts })
+                              });
+                            });
                           });
                         });
                       });
@@ -133,7 +145,11 @@ function getContractByCraftman (req, res){
                       Instrument.populate(contracts, {path: "order.instrument"}, function(err, contracts){
                         Musician.populate(contracts, {path: "order.instrument.musician"}, function(err, contracts){
                           User.populate(contracts, {path: "order.instrument.musician.user"}, function(err, contracts){
-                            res.send(200, { contracts })
+                            Craftman.populate(contracts, {path: "order.craftman"}, function(err, contracts){
+                              User.populate(contracts, {path: "order.craftman.user"}, function(err, contracts){
+                                res.send(200, { contracts })
+                              });
+                            });
                           });
                         });
                       });
