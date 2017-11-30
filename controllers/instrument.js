@@ -35,7 +35,7 @@ function getInstruments (req, res) {
 function getInstrumentbyMusician (req, res) {
   let musicianId = req.params.musicianId
 
-  Instrument.find({"musician":musicianId}, (err, instruments) => {
+  Instrument.find({"musician":musicianId, "status", "A"}, (err, instruments) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!instruments) return res.status(404).send({message: `No existen instrumentos`})
 
