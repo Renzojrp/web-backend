@@ -176,6 +176,7 @@ function saveContract (req, res) {
   contract.musician = req.body.musician
   contract.craftman = req.body.craftman
   contract.price = req.body.price
+  contract.type = req.body.type
 
   contract.save((err, contractStored) => {
     if(err) res.status(500).send({message: `Error al salvar en la base de datos: ${err}`})

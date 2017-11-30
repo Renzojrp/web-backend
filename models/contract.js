@@ -15,6 +15,7 @@ const ContractSchema = new Schema({
   price: Number,
   date: { type: Date, default: Date.now() },
   status: { type: String, default: "A" }
+  type: String,
 })
 
 module.exports = mongoose.model('Contract', ContractSchema)
