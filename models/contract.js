@@ -14,7 +14,7 @@ const ContractSchema = new Schema({
   craftman: {type: Schema.ObjectId, ref: "Craftman"},
   price: Number,
   date: { type: Date, default: Date.now() },
-  status: { type: String, default: "A" }
+  status: { type: String, default: "A" },
   type: String,
 })
 

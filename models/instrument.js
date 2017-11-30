@@ -11,7 +11,7 @@ const InstrumentSchema = new Schema({
   model: String,
   picture: String,
   serialNumber: { type: String, default: "" },
-  status: { type: String, default: "A"}
+  status: { type: String, default: "A" },
 })
 
 module.exports = mongoose.model('Instrument', InstrumentSchema)
