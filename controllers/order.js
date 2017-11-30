@@ -91,7 +91,7 @@ function getOrdersbyCraftman (req, res){
 function getOrdersbyInstrument (req, res){
   let instrumentId = req.params.instrumentId
 
-  Order.find({"instrument":instrumentId}, (err, orders) => {
+  Order.find({"instrument":instrumentId, "status": "A"}, (err, orders) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!orders) return res.status(484).send({message: `No existen ordenes del artesano: ${instrumentId}`})
 

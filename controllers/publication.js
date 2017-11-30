@@ -45,7 +45,7 @@ function getPublications (req, res) {
 function getPublicationbyInstrument (req, res){
   let instrumentId = req.params.instrumentId
 
-  Publication.find({"instrument":instrumentId}, (err, publications) => {
+  Publication.find({"instrument":instrumentId, "status": "A"}, (err, publications) => {
     if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
     if(!publications) return res.status(484).send({message: `No existen publicaciones con el instrumento: ${instrumentId}`})
 
