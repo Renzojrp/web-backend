@@ -10,7 +10,7 @@ const InstrumentSchema = new Schema({
   brand: String,
   model: String,
   picture: String,
-  serialNumber: { type: String, default: "" }
+  serialNumber: { type: String, default: "" },
   status: { type: String, default: "A"}
 })
 
