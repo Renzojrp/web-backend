@@ -16,8 +16,8 @@ function getContract (req, res){
     if(!contract) return res.status(484).send({message: `El contrato no existe`})
 
     Publication.populate(contract, {path: "publication"}, function(err, contract){
-      Instrument.populate(contract, {path: "publicaton.instrument"}, function(err, contract){
-        Musician.populate(contract, {path: "publicaton.instrument.musician"}, function(err, contract){
+      Instrument.populate(contract, {path: "publication.instrument"}, function(err, contract){
+        Musician.populate(contract, {path: "publication.instrument.musician"}, function(err, contract){
           Musician.populate(contract, {path: "musician"}, function(err, contract){
             User.populate(contract, {path: "publicaton.instrument.musician.user"}, function(err, contract){
               Craftman.populate(contract, {path: "craftman"}, function(err, contract){
@@ -54,8 +54,8 @@ function getContracts (req, res) {
     if(!contracts) return res.status(404).send({message: `No existen contratos`})
 
     Publication.populate(contracts, {path: "publication"}, function(err, contracts){
-      Instrument.populate(contracts, {path: "publicaton.instrument"}, function(err, contracts){
-        Musician.populate(contracts, {path: "publicaton.instrument.musician"}, function(err, contracts){
+      Instrument.populate(contracts, {path: "publication.instrument"}, function(err, contracts){
+        Musician.populate(contracts, {path: "publication.instrument.musician"}, function(err, contracts){
           Musician.populate(contracts, {path: "musician"}, function(err, contracts){
             User.populate(contracts, {path: "publicaton.instrument.musician.user"}, function(err, contracts){
               Craftman.populate(contracts, {path: "craftman"}, function(err, contracts){
@@ -94,8 +94,8 @@ function  getContractByMusician (req, res){
     if(!contracts) return res.status(484).send({message: `No existen contratos para este músico: ${contracId}`})
 
     Publication.populate(contracts, {path: "publication"}, function(err, contracts){
-      Instrument.populate(contracts, {path: "publicaton.instrument"}, function(err, contracts){
-        Musician.populate(contracts, {path: "publicaton.instrument.musician"}, function(err, contracts){
+      Instrument.populate(contracts, {path: "publication.instrument"}, function(err, contracts){
+        Musician.populate(contracts, {path: "publication.instrument.musician"}, function(err, contracts){
           Musician.populate(contracts, {path: "musician"}, function(err, contracts){
             User.populate(contracts, {path: "publicaton.instrument.musician.user"}, function(err, contracts){
               Craftman.populate(contracts, {path: "craftman"}, function(err, contracts){
@@ -134,8 +134,8 @@ function getContractByCraftman (req, res){
     if(!contracts) return res.status(484).send({message: `No existen contratos para este artesano: ${contracId}`})
 
     Publication.populate(contracts, {path: "publication"}, function(err, contracts){
-      Instrument.populate(contracts, {path: "publicaton.instrument"}, function(err, contracts){
-        Musician.populate(contracts, {path: "publicaton.instrument.musician"}, function(err, contracts){
+      Instrument.populate(contracts, {path: "publication.instrument"}, function(err, contracts){
+        Musician.populate(contracts, {path: "publication.instrument.musician"}, function(err, contracts){
           Musician.populate(contracts, {path: "musician"}, function(err, contracts){
             User.populate(contracts, {path: "publicaton.instrument.musician.user"}, function(err, contracts){
               Craftman.populate(contracts, {path: "craftman"}, function(err, contracts){
