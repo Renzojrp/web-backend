@@ -19,7 +19,7 @@ function getContract (req, res){
       Instrument.populate(contract, {path: "publication.instrument"}, function(err, contract){
         Musician.populate(contract, {path: "publication.instrument.musician"}, function(err, contract){
           Musician.populate(contract, {path: "musician"}, function(err, contract){
-            User.populate(contract, {path: "publicaton.instrument.musician.user"}, function(err, contract){
+            User.populate(contract, {path: "publication.instrument.musician.user"}, function(err, contract){
               Craftman.populate(contract, {path: "craftman"}, function(err, contract){
                 User.populate(contract, {path: "musician.user"}, function(err, contract){
                   User.populate(contract, {path: "craftman.user"}, function(err, contract){
@@ -57,7 +57,7 @@ function getContracts (req, res) {
       Instrument.populate(contracts, {path: "publication.instrument"}, function(err, contracts){
         Musician.populate(contracts, {path: "publication.instrument.musician"}, function(err, contracts){
           Musician.populate(contracts, {path: "musician"}, function(err, contracts){
-            User.populate(contracts, {path: "publicaton.instrument.musician.user"}, function(err, contracts){
+            User.populate(contracts, {path: "publication.instrument.musician.user"}, function(err, contracts){
               Craftman.populate(contracts, {path: "craftman"}, function(err, contracts){
                 User.populate(contracts, {path: "musician.user"}, function(err, contracts){
                   User.populate(contracts, {path: "craftman.user"}, function(err, contracts){
@@ -97,7 +97,7 @@ function  getContractByMusician (req, res){
       Instrument.populate(contracts, {path: "publication.instrument"}, function(err, contracts){
         Musician.populate(contracts, {path: "publication.instrument.musician"}, function(err, contracts){
           Musician.populate(contracts, {path: "musician"}, function(err, contracts){
-            User.populate(contracts, {path: "publicaton.instrument.musician.user"}, function(err, contracts){
+            User.populate(contracts, {path: "publication.instrument.musician.user"}, function(err, contracts){
               Craftman.populate(contracts, {path: "craftman"}, function(err, contracts){
                 User.populate(contracts, {path: "musician.user"}, function(err, contracts){
                   User.populate(contracts, {path: "craftman.user"}, function(err, contracts){
@@ -137,7 +137,7 @@ function getContractByCraftman (req, res){
       Instrument.populate(contracts, {path: "publication.instrument"}, function(err, contracts){
         Musician.populate(contracts, {path: "publication.instrument.musician"}, function(err, contracts){
           Musician.populate(contracts, {path: "musician"}, function(err, contracts){
-            User.populate(contracts, {path: "publicaton.instrument.musician.user"}, function(err, contracts){
+            User.populate(contracts, {path: "publication.instrument.musician.user"}, function(err, contracts){
               Craftman.populate(contracts, {path: "craftman"}, function(err, contracts){
                 User.populate(contracts, {path: "musician.user"}, function(err, contracts){
                   User.populate(contracts, {path: "craftman.user"}, function(err, contracts){
