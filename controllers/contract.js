@@ -91,7 +91,9 @@ function getContractByCraftman (req, res){
           User.populate(contracts, {path: "instrument.musician.user"}, function(err, contracts){
             Craftman.populate(contracts, {path: "craftman"}, function(err, contracts){
               User.populate(contracts, {path: "craftman.user"}, function(err, contracts){
-                res.send(200, { contracts })
+                Musician.populate(contracts, {path: "musician"}, function(err, contracts){
+                  res.send(200, { contracts })
+                });
               });
             });
           });
